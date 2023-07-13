@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/app 
+    depends_on:
+      - db
+  frontend:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app
+    ports:
+      - 3000:3000 
+  db:
+    image: "postgres:15-alpine"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=bookers
+    volumes:
+      - db-store:/var/lib/postgresql/data
+
+volumes:
+  db-store:
