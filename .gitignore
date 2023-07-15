@@ -1,1 +1,42 @@
 .DS_Store
+
+
+# fronted
+
+#デフォルトで作成されたファイルを外す
+./fronted/README.md
+./fronted/.gitignore
+
+# dependencies
+./fronted/node_modules
+./fronted/.pnp
+./fronted/.pnp.js
+
+# testing
+./fronted//coverage
+
+# next.js
+./fronted//.next/
+./fronted//out/
+
+# production
+./fronted//build
+
+# misc
+./fronted/.DS_Store
+./fronted/*.pem
+
+# debug
+./fronted/npm-debug.log*
+./fronted/yarn-debug.log*
+./fronted/yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+./fronted/.vercel
+
+# typescript
+./fronted/*.tsbuildinfo
+./fronted/next-env.d.ts
