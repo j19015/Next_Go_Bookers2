@@ -25,7 +25,7 @@ services:
       - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=bookers
+      - POSTGRES_DB=bookers2
     volumes:
       - db-store:/var/lib/postgresql/data
 
