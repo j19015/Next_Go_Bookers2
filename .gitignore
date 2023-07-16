@@ -4,39 +4,39 @@
 # fronted
 
 #デフォルトで作成されたファイルを外す
-./fronted/README.md
-./fronted/.gitignore
+./frontend/README.md
+./frontend/.gitignore
 
 # dependencies
-./fronted/node_modules
-./fronted/.pnp
-./fronted/.pnp.js
+./frontend/node_modules
+./frontend/.pnp
+./frontend/.pnp.js
 
 # testing
-./fronted//coverage
+./frontend/coverage
 
 # next.js
-./fronted//.next/
-./fronted//out/
+./frontend/.next/
+./frontend/out/
 
 # production
-./fronted//build
+./frontend/build
 
 # misc
-./fronted/.DS_Store
-./fronted/*.pem
+./frontend/.DS_Store
+./frontend/*.pem
 
 # debug
-./fronted/npm-debug.log*
-./fronted/yarn-debug.log*
-./fronted/yarn-error.log*
+./frontend/npm-debug.log*
+./frontend/yarn-debug.log*
+./frontend/yarn-error.log*
 
 # local env files
 .env*.local
 
 # vercel
-./fronted/.vercel
+./frontend/.vercel
 
 # typescript
-./fronted/*.tsbuildinfo
-./fronted/next-env.d.ts
+./frontend/*.tsbuildinfo
+./frontend/next-env.d.ts
