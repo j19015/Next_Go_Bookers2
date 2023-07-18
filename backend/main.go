@@ -31,6 +31,14 @@ func main() {
 		})
 	})
 
+	router.POST("/sign_in",func(c *gin.Context){
+		//ログインで送られてくるリクエストを型定義
+		type LoginRequest struct{
+			Name string `json:"name" binding:"required"`
+			Password string `json:"password" binding:"required"`
+		}
+	})
+
 	// サーバーの開始
 	router.Run(":8000")
 }
