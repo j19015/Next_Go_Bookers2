@@ -39,8 +39,32 @@ func main() {
 			Name string `json:"name" binding:"required"`
 			Password string `json:"password" binding:"required"`
 		}
+
+		//reqをSignUpRequestで定義
+		var req SignUpRequest
+    if err := c.ShouldBindJSON(&req); err != nil {
+        c.JSON(400, gin.H{"error": "Invalid request"})
+        return
+    }
+
+		//ユーザ登録
+		newUser,err := client.User.
+        Create().
+        SetEmail(req.Email).
+        SetName(req.Name).
+        SetPassword(req.Password).
+        Save(context.Background())
+
+		//エラーの場合はエラーを返す。
+		if err != nil {
+			c.JSON(500, gin.H{"error": err.Error(),"messsage":"本の保存ができませんでした。"})
+			return
+		}
+		// 保存したBookの情報をレスポンスとして返す。
+		c.JSON(201, newUser)
+
 	})
-	
+
 	//ユーザログイン機能
 	router.POST("/sign_in",func(c *gin.Context){
 		//ログインで送られてくるリクエストを型定義
