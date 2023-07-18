@@ -31,6 +31,17 @@ func main() {
 		})
 	})
 
+	//ユーザ新規登録機能
+	router.POST("/sign_up",func(c *gin.Context){
+		//サインアップで送られてくるリクエストを型定義
+		type SignUpRequest struct{
+			Email string `json:"email" binding:"required"`
+			Name string `json:"name" binding:"required"`
+			Password string `json:"password" binding:"required"`
+		}
+	})
+	
+	//ユーザログイン機能
 	router.POST("/sign_in",func(c *gin.Context){
 		//ログインで送られてくるリクエストを型定義
 		type LoginRequest struct{
