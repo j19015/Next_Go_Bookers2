@@ -5,6 +5,8 @@ import (
 	"context"
   "log"
 	"github.com/j19015/Next_Go_Bookers2/ent"
+	"github.com/j19015/Next_Go_Bookers2/ent/user"
+	
 	_ "github.com/lib/pq"
 )
 
@@ -57,7 +59,7 @@ func main() {
 
 		//エラーの場合はエラーを返す。
 		if err != nil {
-			c.JSON(500, gin.H{"error": err.Error(),"messsage":"本の保存ができませんでした。"})
+			c.JSON(500, gin.H{"error": err.Error(),"messsage":"sign up succcessful"})
 			return
 		}
 		// 保存したBookの情報をレスポンスとして返す。
@@ -68,10 +70,32 @@ func main() {
 	//ユーザログイン機能
 	router.POST("/sign_in",func(c *gin.Context){
 		//ログインで送られてくるリクエストを型定義
-		type LoginRequest struct{
-			Name string `json:"name" binding:"required"`
+		type SignInRequest struct{
+			Email string `json:"email" binding:"required"`
 			Password string `json:"password" binding:"required"`
 		}
+
+		//reqをSignInRequestで定義
+		var req SignInRequest
+		if err :=c.ShouldBindJSON(&req); err != nil{
+			c.JSON(400, gin.H{"error": "Invalid request"})
+      return
+		}
+
+		// ユーザの検索
+		sign_in_user, err := client.User.Query().
+			Where(user.EmailEQ(req.Email), user.PasswordEQ(req.Password)).
+			First(context.Background())
+		
+		//エラーを返す
+		if err != nil {
+			c.JSON(401, gin.H{"error": "invalid credentials"})
+			return
+		}
+
+		// ログイン成功
+		c.JSON(200, gin.H{"message": "login successful", "user_id": sign_in_user.ID})
+
 	})
 
 	// サーバーの開始
