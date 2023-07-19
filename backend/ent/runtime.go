@@ -25,11 +25,11 @@ func init() {
 	// book.BodyValidator is a validator for the "body" field. It is called by the builders before save.
 	book.BodyValidator = bookDescBody.Validators[0].(func(string) error)
 	// bookDescCreatedAt is the schema descriptor for created_at field.
-	bookDescCreatedAt := bookFields[2].Descriptor()
+	bookDescCreatedAt := bookFields[3].Descriptor()
 	// book.DefaultCreatedAt holds the default value on creation for the created_at field.
 	book.DefaultCreatedAt = bookDescCreatedAt.Default.(func() time.Time)
 	// bookDescUpdatedAt is the schema descriptor for updated_at field.
-	bookDescUpdatedAt := bookFields[3].Descriptor()
+	bookDescUpdatedAt := bookFields[4].Descriptor()
 	// book.DefaultUpdatedAt holds the default value on creation for the updated_at field.
 	book.DefaultUpdatedAt = bookDescUpdatedAt.Default.(func() time.Time)
 	// book.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.

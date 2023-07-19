@@ -32,6 +32,12 @@ func (bc *BookCreate) SetBody(s string) *BookCreate {
 	return bc
 }
 
+// SetUserID sets the "user_id" field.
+func (bc *BookCreate) SetUserID(i int) *BookCreate {
+	bc.mutation.SetUserID(i)
+	return bc
+}
+
 // SetCreatedAt sets the "created_at" field.
 func (bc *BookCreate) SetCreatedAt(t time.Time) *BookCreate {
 	bc.mutation.SetCreatedAt(t)
@@ -123,6 +129,9 @@ func (bc *BookCreate) check() error {
 			return &ValidationError{Name: "body", err: fmt.Errorf(`ent: validator failed for field "Book.body": %w`, err)}
 		}
 	}
+	if _, ok := bc.mutation.UserID(); !ok {
+		return &ValidationError{Name: "user_id", err: errors.New(`ent: missing required field "Book.user_id"`)}
+	}
 	if _, ok := bc.mutation.CreatedAt(); !ok {
 		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "Book.created_at"`)}
 	}
@@ -162,6 +171,10 @@ func (bc *BookCreate) createSpec() (*Book, *sqlgraph.CreateSpec) {
 	if value, ok := bc.mutation.Body(); ok {
 		_spec.SetField(book.FieldBody, field.TypeString, value)
 		_node.Body = value
+	}
+	if value, ok := bc.mutation.UserID(); ok {
+		_spec.SetField(book.FieldUserID, field.TypeInt, value)
+		_node.UserID = &value
 	}
 	if value, ok := bc.mutation.CreatedAt(); ok {
 		_spec.SetField(book.FieldCreatedAt, field.TypeTime, value)

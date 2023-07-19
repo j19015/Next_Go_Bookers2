@@ -18,6 +18,8 @@ func (Book) Fields() []ent.Field {
 			NotEmpty(),
 		field.String("body").
 			NotEmpty(),
+		field.Int("user_id").
+			Nillable(), //NULLを許可しない設定がなく、defaultで0が入ってしまうのを防ぐため追加
 		field.Time("created_at").
 			Default(time.Now),
 		field.Time("updated_at").

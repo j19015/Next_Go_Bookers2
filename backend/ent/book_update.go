@@ -40,6 +40,19 @@ func (bu *BookUpdate) SetBody(s string) *BookUpdate {
 	return bu
 }
 
+// SetUserID sets the "user_id" field.
+func (bu *BookUpdate) SetUserID(i int) *BookUpdate {
+	bu.mutation.ResetUserID()
+	bu.mutation.SetUserID(i)
+	return bu
+}
+
+// AddUserID adds i to the "user_id" field.
+func (bu *BookUpdate) AddUserID(i int) *BookUpdate {
+	bu.mutation.AddUserID(i)
+	return bu
+}
+
 // SetCreatedAt sets the "created_at" field.
 func (bu *BookUpdate) SetCreatedAt(t time.Time) *BookUpdate {
 	bu.mutation.SetCreatedAt(t)
@@ -134,6 +147,12 @@ func (bu *BookUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := bu.mutation.Body(); ok {
 		_spec.SetField(book.FieldBody, field.TypeString, value)
 	}
+	if value, ok := bu.mutation.UserID(); ok {
+		_spec.SetField(book.FieldUserID, field.TypeInt, value)
+	}
+	if value, ok := bu.mutation.AddedUserID(); ok {
+		_spec.AddField(book.FieldUserID, field.TypeInt, value)
+	}
 	if value, ok := bu.mutation.CreatedAt(); ok {
 		_spec.SetField(book.FieldCreatedAt, field.TypeTime, value)
 	}
@@ -169,6 +188,19 @@ func (buo *BookUpdateOne) SetTitle(s string) *BookUpdateOne {
 // SetBody sets the "body" field.
 func (buo *BookUpdateOne) SetBody(s string) *BookUpdateOne {
 	buo.mutation.SetBody(s)
+	return buo
+}
+
+// SetUserID sets the "user_id" field.
+func (buo *BookUpdateOne) SetUserID(i int) *BookUpdateOne {
+	buo.mutation.ResetUserID()
+	buo.mutation.SetUserID(i)
+	return buo
+}
+
+// AddUserID adds i to the "user_id" field.
+func (buo *BookUpdateOne) AddUserID(i int) *BookUpdateOne {
+	buo.mutation.AddUserID(i)
 	return buo
 }
 
@@ -295,6 +327,12 @@ func (buo *BookUpdateOne) sqlSave(ctx context.Context) (_node *Book, err error) 
 	}
 	if value, ok := buo.mutation.Body(); ok {
 		_spec.SetField(book.FieldBody, field.TypeString, value)
+	}
+	if value, ok := buo.mutation.UserID(); ok {
+		_spec.SetField(book.FieldUserID, field.TypeInt, value)
+	}
+	if value, ok := buo.mutation.AddedUserID(); ok {
+		_spec.AddField(book.FieldUserID, field.TypeInt, value)
 	}
 	if value, ok := buo.mutation.CreatedAt(); ok {
 		_spec.SetField(book.FieldCreatedAt, field.TypeTime, value)
