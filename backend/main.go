@@ -98,6 +98,17 @@ func main() {
 
 	})
 
+
+	//本の新規登録
+	router.POST("/books",func(c *gin.Context){
+		//本の新規登録で送られてくるリクエストを型定義
+		type  NewBook struct{
+			Title string `json:"title" binding:"required"`
+			Body string `json:"body" binding:"required"`
+			UserId string`json:"user_id" binding:"required"`
+		}
+	})
+
 	// サーバーの開始
 	router.Run(":8000")
 }
