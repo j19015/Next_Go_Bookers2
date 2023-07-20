@@ -105,7 +105,7 @@ func main() {
 		type  NewBookRequest struct{
 			Title string `json:"title" binding:"required"`
 			Body string `json:"body" binding:"required"`
-			UserId string`json:"user_id" binding:"required"`
+			UserId int`json:"user_id" binding:"required"`
 		}
 
 		//reqをNewBookRequestで定義
@@ -119,7 +119,7 @@ func main() {
 				Create().
 				SetTitle(req.Title).
 				SetBody(req.Body).
-				SetUserId(req.UserId).
+				SetUserID(req.UserId).
 				Save(context.Background())
 	})
 
