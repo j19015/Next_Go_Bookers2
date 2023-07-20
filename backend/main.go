@@ -59,7 +59,7 @@ func main() {
 
 		//エラーの場合はエラーを返す。
 		if err != nil {
-			c.JSON(500, gin.H{"error": err.Error(),"messsage":"sign up succcessful"})
+			c.JSON(500, gin.H{"error": err.Error(),"messsage":"sign up missing"})
 			return
 		}
 		// 保存したBookの情報をレスポンスとして返す。
@@ -121,6 +121,15 @@ func main() {
 				SetBody(req.Body).
 				SetUserID(req.UserId).
 				Save(context.Background())
+		
+		//エラーがある場合はエラーを返して終了
+		if err != nil {
+			c.JSON(500, gin.H{"error": err.Error(),"messsage":"create book missing"})
+			return
+		}
+	
+		// 保存したBookの情報をレスポンスとして返す
+		c.JSON(201, newBook)
 	})
 
 	// サーバーの開始
