@@ -132,6 +132,11 @@ func main() {
 		c.JSON(201, newBook)
 	})
 
+	//本の情報を取得
+	router.GET("/books/:id",func(c *gin.Context){
+		
+	})
+
 	// サーバーの開始
 	router.Run(":8000")
 }
