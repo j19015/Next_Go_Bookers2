@@ -8,6 +8,7 @@ import (
 	"github.com/j19015/Next_Go_Bookers2/ent/user"
 	
 	_ "github.com/lib/pq"
+	"strconv"
 )
 
 func main() {
@@ -134,8 +135,28 @@ func main() {
 
 	//本の情報を取得
 	router.GET("/books/:id",func(c *gin.Context){
-		
-	})
+		//URLパラメータから本のIDを取得する。
+		bookIDStr:=c.Param("id")
+		bookID,err :=strconv.Atoi(bookIDStr)
+		//パラメータが不正な場合はエラーを出力して終了
+		if err != nil {
+			c.JSON(400,gin.H{"error": "無効な本のIDです。"})
+			return
+		}
+		// 指定されたIDの本をデータベースからクエリする
+		// GETは主キーの検索の時だけ使える
+		//context.Backgroud()は非同期用みたいな感じ
+		book, err := client.Book.Get(context.Background(), bookID)
+
+		if err != nil {
+			c.JSON(404,gin.H{"error": err.Error(),"messsage":"指定された本が見つかりません。"})
+			return
+		}
+
+		// 本の情報をJSON形式でレスポンスとして返す
+		c.JSON(200, book)
+
+		})
 
 	// サーバーの開始
 	router.Run(":8000")
