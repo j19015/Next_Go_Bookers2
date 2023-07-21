@@ -140,7 +140,7 @@ func main() {
 		bookID,err :=strconv.Atoi(bookIDStr)
 		//パラメータが不正な場合はエラーを出力して終了
 		if err != nil {
-			c.JSON(400,gin.H{"error": "無効な本のIDです。"})
+			c.JSON(400,gin.H{"error": "Invalid Book ID"})
 			return
 		}
 		// 指定されたIDの本をデータベースからクエリする
@@ -149,7 +149,7 @@ func main() {
 		book, err := client.Book.Get(context.Background(), bookID)
 
 		if err != nil {
-			c.JSON(404,gin.H{"error": err.Error(),"messsage":"指定された本が見つかりません。"})
+			c.JSON(404,gin.H{"error": err.Error(),"messsage":"Book with specified id not found"})
 			return
 		}
 
