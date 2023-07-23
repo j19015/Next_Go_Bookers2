@@ -158,6 +158,20 @@ func main() {
 
 		})
 
+		//本の一覧を取得
+		router.GET("/books",func(c *gin.Context){
+
+			//Book一覧を取得する
+			books,err:=client.Book.Query().All(context.Background())
+			if err!=nil{
+				c.JSON(500,gin.H{"error": err.Error(),"messsage":"Could not get the book list."})
+				return
+			}
+			
+			//booksをjson形式で返す
+			c.JSON(200, books)
+		})
+
 	// サーバーの開始
 	router.Run(":8000")
 }
