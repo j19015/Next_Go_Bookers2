@@ -11,6 +11,13 @@ import (
 	"strconv"
 )
 
+//Bookの型定義
+type Book struct {
+	Title string `json:"title"`
+	Body  string `json:"body"`
+	UserID int `json:user_id`
+}
+
 func main() {
 
 	//PostgreSQLに接続
@@ -167,7 +174,7 @@ func main() {
 				c.JSON(500,gin.H{"error": err.Error(),"messsage":"Could not get the book list."})
 				return
 			}
-			
+
 			//booksをjson形式で返す
 			c.JSON(200, books)
 		})
