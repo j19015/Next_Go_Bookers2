@@ -15,7 +15,6 @@ import (
 type Book struct {
 	Title string `json:"title"`
 	Body  string `json:"body"`
-	UserID int `json:user_id`
 }
 
 func main() {
@@ -188,8 +187,33 @@ func main() {
 		//bookに受け取った値を格納
 		if err:=c.ShouldBindJSON(&book);err!=nil{
 			c.JSON(400,gin.H{"error": err.Error(),"message":"Invalid Book ID"})
+			return
 		}
 		
+		//URLパラメータから本のIDを取得
+		bookIDStr:=c.Param("id")
+		bookID,err:=strconv.Atoi(bookIDStr)
+		if err!=nil{
+			c.JSON(400,gin.H{"error": err.Error(),"messsage":"could not translation string->int"})
+			return
+		}
+		// 指定されたIDの本をデータベースからクエリする
+		// GETは主キーの検索の時だけ使える
+		//context.Backgroud()は非同期用みたいな感じ
+		update_book, err := client.Book.
+				UpdateOneID(bookID).
+				SetTitle(book.Title).
+				SetBody(book.Body).
+				Save(context.Background())
+		
+		//エラーならエラーを返して終了
+		if err != nil {
+			c.JSON(404, gin.H{"error": err.Error(),"messsage":"Couldn't update"})
+			return
+		}
+	
+		// 本の情報をJSON形式でレスポンスとして返す
+		c.JSON(200, update_book)
 	})
 		
 	// サーバーの開始
