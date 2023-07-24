@@ -181,6 +181,14 @@ func main() {
 
 	//本情報を更新する。
 	router.PATCH("/books/:id",func(c *gin.Context){
+
+		//引数で値を受け取るように型を定義
+		var book Book
+
+		//bookに受け取った値を格納
+		if err:=c.ShouldBindJSON(&book);err!=nil{
+			c.JSON(400,gin.H{"error": err.Error(),"message":"Invalid Book ID"})
+		}
 		
 	})
 		
