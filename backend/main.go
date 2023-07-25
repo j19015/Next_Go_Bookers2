@@ -215,6 +215,11 @@ func main() {
 		// 本の情報をJSON形式でレスポンスとして返す
 		c.JSON(200, update_book)
 	})
+
+	//本を削除
+	router.DELETE("/books/:id",func(c *gin.Context){
+		
+	})
 		
 	// サーバーの開始
 	router.Run(":8000")
