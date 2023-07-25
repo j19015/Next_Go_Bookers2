@@ -218,8 +218,27 @@ func main() {
 
 	//本を削除
 	router.DELETE("/books/:id",func(c *gin.Context){
-		
-	})
+		// URLパラメータから本のIDを取得する
+		bookIDStr := c.Param("id")
+		bookID, err := strconv.Atoi(bookIDStr)
+		if err != nil {
+				c.JSON(400, gin.H{"error": "無効な本のIDです。"})
+				return
+		}
+
+		// 指定されたIDの本をデータベースからクエリする
+		//context.Backgroud()は非同期用みたいな感じ
+		err = client.Book.DeleteOneID(bookID).Exec(context.Background())
+
+
+		if err != nil {
+			c.JSON(404, gin.H{"error": "削除に失敗しました。"})
+			return
+		}
+
+		// 本の情報をJSON形式でレスポンスとして返す
+		c.JSON(200, gin.H{"message": "削除完了しました。"})
+		})
 		
 	// サーバーの開始
 	router.Run(":8000")
