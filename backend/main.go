@@ -222,7 +222,7 @@ func main() {
 		bookIDStr := c.Param("id")
 		bookID, err := strconv.Atoi(bookIDStr)
 		if err != nil {
-				c.JSON(400, gin.H{"error": "無効な本のIDです。"})
+				c.JSON(400, gin.H{"error": "Invalid Book ID"})
 				return
 		}
 
@@ -232,12 +232,12 @@ func main() {
 
 
 		if err != nil {
-			c.JSON(404, gin.H{"error": "削除に失敗しました。"})
+			c.JSON(404, gin.H{"error": "Failed to delete"})
 			return
 		}
 
 		// 本の情報をJSON形式でレスポンスとして返す
-		c.JSON(200, gin.H{"message": "削除完了しました。"})
+		c.JSON(200, gin.H{"message": "Delete completed"})
 		})
 		
 	// サーバーの開始
