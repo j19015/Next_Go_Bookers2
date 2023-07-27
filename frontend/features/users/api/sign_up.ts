@@ -4,12 +4,12 @@ interface User{
   password: string;
 }
 
-interface Date{
+interface ServerResponse{
   error: string;
   messeage: string;
 }
 
-export const sign_up=async(user :User)=>{
+export const signUpUser=async(user :User)=>{
   try{
     // POSTリクエストを使用してユーザー情報をサーバーに送信
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/sign_up`, {
@@ -20,8 +20,8 @@ export const sign_up=async(user :User)=>{
       body: JSON.stringify(user),
     });
     // サーバーからのレスポンスを取得
-    const data :Date = await response.json();
-    
+    const data :ServerResponse = await response.json();
+
     // サーバーからのレスポンスに基づいて適切な処理を実行
     if (response.ok) {
       // 成功した場合の処理
