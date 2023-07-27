@@ -6,6 +6,8 @@ import React from 'react';
 import Link from 'next/link';
 //状態維持
 import { useState,FormEvent  } from "react";
+//signUpUserをimport
+import { signUpUser } from '../../../../features/users/api/sign_up';
 
 const Home = () => {
 
@@ -15,11 +17,13 @@ const Home = () => {
   const [password,setPassword] = useState('')
 
   //form submit時の処理
-  const handleSubmit=(e: FormEvent<HTMLFormElement>)=>{
+  const handleSubmit=async(e: FormEvent<HTMLFormElement>)=>{
     //formのデフォルトの送信を防止
     e.preventDefault();
+    //signUpUserを実行
+    const res= await signUpUser({name,email,password});
     // ここでサーバーにユーザー情報を送信するなどの処理を行う
-    console.log('Submitted:', name, email, password);
+    console.log('Submitted:', res);
 
   }
 
