@@ -1,11 +1,18 @@
 import React from 'react';
-//nextでページ遷移を行うため
+//ページ遷移
 import Link from 'next/link';
+//状態維持
+import { useEffect, useState } from "react";
 
 const Home = () => {
+
+  //name,email,passwordをuseStateで定義
+  
+
   return (
     <>
-      <h1>新規登録ページ</h1>
+      <h1>Sign up</h1>
+
     </>
   );
 };
