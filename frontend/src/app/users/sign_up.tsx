@@ -7,12 +7,14 @@ import { useEffect, useState } from "react";
 const Home = () => {
 
   //name,email,passwordをuseStateで定義
-  
+   const [name,SetName] = useState('')
+   const [email,SetEmail] = useState('')
+   const [password,SetPassword] = useState('')
 
   return (
     <>
       <h1>Sign up</h1>
-
+      
     </>
   );
 };
