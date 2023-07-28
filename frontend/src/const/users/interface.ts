@@ -4,7 +4,7 @@ export interface User{
   password: string;
 }
 
-export interface CreateUser extends User{
+export interface ResponseUser extends User{
   id: number;
 }
 

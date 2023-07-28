@@ -1,4 +1,4 @@
-import { User,CreateUser,ServerResponse } from '../../../const/users/interface';
+import { User,ResponseUser,ServerResponse } from '../../../const/users/interface';
 
 export const signUpUser=async(user :User)=>{
   try{
@@ -15,7 +15,7 @@ export const signUpUser=async(user :User)=>{
     // サーバーからのレスポンスに基づいて適切な処理を実行
     if (response.ok) {
       // サーバーからのレスポンスを取得
-      const data: CreateUser = await response.json();
+      const data: ResponseUser = await response.json();
       return data; // 正常なレスポンスの場合はデータを返す
 
     } else {

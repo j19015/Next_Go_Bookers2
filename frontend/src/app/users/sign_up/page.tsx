@@ -9,7 +9,7 @@ import { useState,FormEvent  } from "react";
 //signUpUserをimport
 import { signUpUser } from '../../../features/users/api/sign_up';
 
-import { User,CreateUser,ServerResponse } from '../../../const/users/interface';
+import { User,ResponseUser,ServerResponse } from '../../../const/users/interface';
 
 const Home = () => {
 
@@ -23,7 +23,7 @@ const Home = () => {
     //formのデフォルトの送信を防止
     e.preventDefault();
     //signUpUserを実行
-    const res: CreateUser | ServerResponse = await signUpUser({name,email,password});
+    const res: ResponseUser | ServerResponse = await signUpUser({name,email,password});
     // ここでサーバーにユーザー情報を送信するなどの処理を行う
     if ('error' in res) {
       // エラーが発生した場合
