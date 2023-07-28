@@ -38,7 +38,45 @@ const Home = () => {
 
   return (
     <>
-      <h1>ログインページ</h1>
+      <div className='min-h-screen flex items-center justify-center bg-gray-100'>
+        <div className='bg-white p-8 rounded shadow-md w-96'>
+          <h1 className='text-3xl font-bold mb-6 text-black'>Sign In</h1>
+          <form onSubmit={handlesubmit}>
+            <div className='mb-4'>
+              <label className='text-black mb-1'>
+                Email:
+                <input
+                  type="email"
+                  value={email}
+                  className='w-full border-2 border-gray-300 rounded-md p-2'
+                  onChange={(e)=>setEmail(e.target.value)}
+                >
+                </input>
+              </label>
+            </div>
+            <div className='mb-4'>
+              <label className='text-black mb-1'>
+                Password:
+                <input
+                  type="password"
+                  value={password}
+                  className='w-full border-2 border-gray-300 rounded-md p-2'
+                  onChange={(e)=>{setPassword(e.target.value)}}
+                >
+                </input>
+              </label>
+            </div>
+            <div>
+              <button
+                type='submit'
+                className='bg-blue-500 text-white rounded-md px-4 py-2'
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </>
   );
 };
