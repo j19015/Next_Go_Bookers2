@@ -7,7 +7,9 @@ import Link from 'next/link';
 //状態維持
 import { useState,FormEvent  } from "react";
 //signUpUserをimport
-import { signUpUser } from '../../../../features/users/api/sign_up';
+import { signUpUser } from '../../../features/users/api/sign_up';
+
+import { User,CreateUser,ServerResponse } from '../../../const/users/interface';
 
 const Home = () => {
 
@@ -21,10 +23,17 @@ const Home = () => {
     //formのデフォルトの送信を防止
     e.preventDefault();
     //signUpUserを実行
-    const res= await signUpUser({name,email,password});
+    const res: CreateUser | ServerResponse = await signUpUser({name,email,password});
     // ここでサーバーにユーザー情報を送信するなどの処理を行う
-    console.log('Submitted:', res);
-
+    if ('error' in res) {
+      // エラーが発生した場合
+      console.error('ユーザーの登録に失敗しました。');
+      console.error('Error:', res.error);
+    } else {
+      // エラーが発生しなかった場合（正常なレスポンスの場合）
+      console.log('ユーザーの登録に成功しました！');
+      console.log('User:', res);
+    }
   }
 
   return (
