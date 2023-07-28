@@ -1,13 +1,18 @@
+//ログイン用
 export interface User{
-  name: string;
   email: string;
   password: string;
 }
-
-export interface ResponseUser extends User{
+//ユーザ作成時用
+export interface CreateUser extends User{
+  name: string;
+}
+//response受け取る時用
+export interface ResponseUser extends CreateUser{
   id: number;
 }
 
+//エラーメッセージ用のレスポンス
 export interface ServerResponse{
   error: string;
   message: string;

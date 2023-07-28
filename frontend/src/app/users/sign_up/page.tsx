@@ -9,7 +9,7 @@ import { useState,FormEvent  } from "react";
 //signUpUserをimport
 import { signUpUser } from '../../../features/users/api/sign_up';
 
-import { User,ResponseUser,ServerResponse } from '../../../const/users/interface';
+import { ResponseUser,ServerResponse } from '../../../const/users/interface';
 
 const Home = () => {
 

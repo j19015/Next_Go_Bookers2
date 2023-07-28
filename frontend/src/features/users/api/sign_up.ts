@@ -1,6 +1,6 @@
-import { User,ResponseUser,ServerResponse } from '../../../const/users/interface';
+import { User,ResponseUser,ServerResponse, CreateUser } from '../../../const/users/interface';
 
-export const signUpUser=async(user :User)=>{
+export const signUpUser=async(user :CreateUser)=>{
   try{
     // POSTリクエストを使用してユーザー情報をサーバーに送信
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/sign_up`, {
