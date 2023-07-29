@@ -6,7 +6,8 @@ import React,{useState,useEffect} from 'react';
 import Link from 'next/link';
 //session情報を取得
 import { sessionConfirm } from '@/features/users/api/session';
-
+//sign_outの処理をimport
+import { SignOut } from '@/features/users/api/sign_out';
 const Header = () => {
 
 
