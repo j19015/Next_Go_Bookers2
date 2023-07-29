@@ -22,11 +22,11 @@ const Home = () => {
 
   useEffect(()=>{
     const res = sessionConfirm();
-    console.log(res);
+    console.log("既にログインしています。",res);
   },[])
 
   //form submitの処理
-  const handlesubmit=async(e: FormEvent<HTMLFormElement>)=>{
+  const handleSubmit=async(e: FormEvent<HTMLFormElement>)=>{
     //formのデフォルト送信を防止
     e.preventDefault();
     //signInUserを実行
@@ -51,7 +51,7 @@ const Home = () => {
       <div className='min-h-screen flex items-center justify-center bg-gray-100'>
         <div className='bg-white p-8 rounded shadow-md w-96'>
           <h1 className='text-3xl font-bold mb-6 text-black'>Sign In</h1>
-          <form onSubmit={handlesubmit}>
+          <form onSubmit={handleSubmit}>
             <div className='mb-4'>
               <label className='text-black mb-1'>
                 Email:

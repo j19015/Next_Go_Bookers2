@@ -21,7 +21,7 @@ const Home = () => {
 
   useEffect(()=>{
     const res = sessionConfirm();
-    console.log(res);
+    console.log("既にログインしています。",res);
   },[])
 
   //form submit時の処理
