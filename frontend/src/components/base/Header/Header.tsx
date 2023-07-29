@@ -49,7 +49,7 @@ const Header = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/users/sign_out">
+                    <Link href="/" onClick={SignOut}>
                       Sign Out
                     </Link>
                   </li>
