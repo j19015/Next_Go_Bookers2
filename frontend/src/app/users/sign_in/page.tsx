@@ -21,8 +21,8 @@ const Home = () => {
   const [password,setPassword]=useState('');
 
   useEffect(()=>{
-    const res = sessionConfirm();
-    console.log("既にログインしています。",res);
+    const session = sessionConfirm();
+    console.log("既にログインしています。",session);
   },[])
 
   //form submitの処理

@@ -14,8 +14,8 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(()=>{
-    const session_user=sessionConfirm()
-    session_user ? setIsLoggedIn(true): setIsLoggedIn(false);
+    const session=sessionConfirm()
+    session ? setIsLoggedIn(true): setIsLoggedIn(false);
   },[])
 
   // サインアウト処理
