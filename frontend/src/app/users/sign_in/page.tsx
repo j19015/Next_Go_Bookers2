@@ -5,11 +5,13 @@ import React from 'react';
 //nextでページ遷移を行うため
 import Link from 'next/link';
 //状態維持
-import { useState,FormEvent } from 'react';
+import { useState,FormEvent,useEffect } from 'react';
 //SignInUserをimport
 import { signInUser } from '@/features/users/api/sign_in';
 //レスポンス用のinterfaceをimport
 import { ResponseUser,ServerResponse } from '../../../const/users/interface';
+//セッションを受け取る関数をimport
+import { sessionConfirm } from '@/features/users/api/session';
 
 
 
@@ -17,6 +19,11 @@ const Home = () => {
   //emailとpasswordを定義
   const [email,setEmail]=useState('');
   const [password,setPassword]=useState('');
+
+  useEffect(()=>{
+    const res = sessionConfirm();
+    console.log(res);
+  },[])
 
   //form submitの処理
   const handlesubmit=async(e: FormEvent<HTMLFormElement>)=>{
@@ -34,7 +41,7 @@ const Home = () => {
       console.log('ユーザーのログインに成功しました！');
       // ログイン成功の場合、セッション情報をlocalStorageに保存
       localStorage.setItem('session', JSON.stringify(res));
-      
+
       console.log('User:', res);
     }
   }

@@ -1,22 +1,28 @@
 //クライアントサイドのレンダリングであることを伝える
 "use client";
 
-import React from 'react';
+import React, { useEffect } from 'react';
 //ページ遷移
 import Link from 'next/link';
 //状態維持
 import { useState,FormEvent  } from "react";
 //signUpUserをimport
 import { signUpUser } from '../../../features/users/api/sign_up';
-
+//Responseをinterfaseからimport
 import { ResponseUser,ServerResponse } from '../../../const/users/interface';
-
+//セッションを受け取る関数をimport
+import { sessionConfirm } from '@/features/users/api/session';
 const Home = () => {
 
   //name,email,passwordをuseStateで定義
   const [name,setName] = useState('')
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
+
+  useEffect(()=>{
+    const res = sessionConfirm();
+    console.log(res);
+  },[])
 
   //form submit時の処理
   const handleSubmit=async(e: FormEvent<HTMLFormElement>)=>{
