@@ -18,6 +18,12 @@ const Header = () => {
     session_user ? setIsLoggedIn(true): setIsLoggedIn(false);
   },[])
 
+  // サインアウト処理
+  const handleSignOut = () => {
+    SignOut(); // サインアウト処理を実行
+    setIsLoggedIn(false); // ステートを更新して再レンダリングをトリガー
+  };
+
   return (
     <header className="bg-blue-500 p-4">
       <div className="container mx-auto">
@@ -49,7 +55,7 @@ const Header = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/" onClick={SignOut}>
+                    <Link href="/" onClick={handleSignOut}>
                       Sign Out
                     </Link>
                   </li>
