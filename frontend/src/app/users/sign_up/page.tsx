@@ -32,6 +32,8 @@ const Home = () => {
     } else {
       // エラーが発生しなかった場合（正常なレスポンスの場合）
       console.log('ユーザーの登録に成功しました！');
+      // 登録成功の場合、セッション情報をlocalStorageに保存
+      localStorage.setItem('session', JSON.stringify(res));
       console.log('User:', res);
     }
   }

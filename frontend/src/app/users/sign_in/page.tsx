@@ -32,6 +32,9 @@ const Home = () => {
     } else {
       // エラーが発生しなかった場合（正常なレスポンスの場合）
       console.log('ユーザーのログインに成功しました！');
+      // ログイン成功の場合、セッション情報をlocalStorageに保存
+      localStorage.setItem('session', JSON.stringify(res));
+      
       console.log('User:', res);
     }
   }
