@@ -83,7 +83,7 @@ func main() {
 			return
 		}
 		// 保存したBookの情報をレスポンスとして返す。
-		c.JSON(201, newUser)
+		c.JSON(201, gin.H{"session_user": newUser})
 
 	})
 
@@ -114,7 +114,7 @@ func main() {
 		}
 
 		// ログイン成功
-		c.JSON(200, gin.H{"message": "login successful", "user_id": sign_in_user.ID})
+		c.JSON(200, gin.H{"session_user": sign_in_user})
 
 	})
 
