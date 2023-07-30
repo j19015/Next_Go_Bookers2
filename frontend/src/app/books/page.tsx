@@ -17,11 +17,11 @@ const Home = () => {
 
   useEffect(() => {
     // ページがロードされた時に本の一覧を取得する
-    fetchBooks();
+    fetchBooksAll();
   },[]);
 
   // 本の一覧を取得する関数
-  const fetchBooks = async () => {
+  const fetchBooksAll = async () => {
     try {
       //APIのレスポンセ鵜を取得
       const res: BookList | ServerResponse = await getBookAll();
