@@ -17,3 +17,10 @@ export interface BookListItem {
 
 // Book一覧取得用
 export type BookList = BookListItem[];
+
+//エラーメッセージ用のレスポンス
+export interface ServerResponse{
+  error: string;
+  message: string;
+}
+
