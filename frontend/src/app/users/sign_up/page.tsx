@@ -29,8 +29,12 @@ const Home = () => {
 
   useEffect(()=>{
     const session = sessionConfirm();
-    console.log("既にログインしています。",session);
-  },[])
+    if(session){
+      console.log("既にログインしています。", session);
+      //books一覧へ飛ばす
+      router.push("/books");
+    }
+  },[router])
 
   //form submit時の処理
   const handleSubmit=async(e: FormEvent<HTMLFormElement>)=>{
