@@ -14,6 +14,8 @@ import { signUpUser } from '../../../features/users/api/sign_up';
 import { ResponseUser,ServerResponse } from '../../../const/users/interface';
 //セッションを受け取る関数をimport
 import { sessionConfirm } from '@/features/users/api/session';
+//Headerコンポーネとをimport
+import Header from '@/components/base/Header/Header'
 
 
 const Home = () => {
@@ -54,6 +56,7 @@ const Home = () => {
 
   return (
     <>
+      <Header></Header>
       <div className='min-h-screen flex items-center justify-center bg-gray-100'>
         <div className='bg-white p-8 rounded shadow-md w-96'>
           <h1 className="text-3xl font-bold mb-6 text-black">Sign up</h1>
