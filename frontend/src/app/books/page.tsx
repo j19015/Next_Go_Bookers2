@@ -26,7 +26,7 @@ const Home = () => {
       //APIのレスポンセ鵜を取得
       const res: BookList | ServerResponse = await getBookAll();
        // resの内容を表示
-      console.log('APIのレスポンス:', res);
+      console.log('API:', res);
       //errorがあった場合の処理
       if ('error' in res) {
         console.error('本の一覧を取得できませんでした。');
@@ -44,8 +44,56 @@ const Home = () => {
 
   return (
     <>
-      <Header></Header>
-      <h1>Book 一覧ページ</h1>
+      <Header />
+      <div className='min-h-screen flex items-center justify-center bg-gray-100'>
+        <div className='bg-white p-8 rounded shadow-md'>
+          <h1 className="text-3xl font-bold my-4 text-black">Book 一覧ページ</h1>
+          <table className='table-auto w-full text-black'>
+            <thead>
+              <tr>
+                <th className="px-4 py-2">Title</th>
+                <th className="px-4 py-2">Body</th>
+                <th className="px-4 py-2"></th>
+                <th className="px-4 py-2"></th>
+                <th className="px-4 py-2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                bookAll.length > 0 ? (
+                  bookAll.map((book) => (
+                    <tr key={book.id}>
+                      <td className="border px-4 py-2">{book.title}</td>
+                      <td className="border px-4 py-2">{book.body}</td>
+                      <td className="border px-4 py-2">
+                        <Link href="/">
+                          <span className="text-blue-500">Show</span>
+                        </Link>
+                      </td>
+                      <td className="border px-4 py-2">
+                        <Link href="/">
+                          <span className="text-green-500">Edit</span>
+                        </Link>
+                      </td>
+                      <td className="border px-4 py-2">
+                        <Link href="/">
+                          <span className="text-red-500">Delete</span>
+                        </Link>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td className="border px-4 py-2" colSpan={5}>
+                      Loading...
+                    </td>
+                  </tr>
+                )
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
     </>
   );
 };
