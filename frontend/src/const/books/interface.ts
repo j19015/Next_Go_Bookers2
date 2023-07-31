@@ -6,11 +6,8 @@ export interface Book{
 }
 
 // Book一覧取得用のitem用
-export interface BookListItem {
+export interface BookListItem extends Book {
   id: number;
-  title: string;
-  body: string;
-  user_id: number;
   created_at: Date;
   updated_at: Date;
 }

@@ -53,6 +53,7 @@ const Home = () => {
               <tr>
                 <th className="px-4 py-2">Title</th>
                 <th className="px-4 py-2">Body</th>
+                <th className="px-4 py-2">User</th>
                 <th className="px-4 py-2"></th>
                 <th className="px-4 py-2"></th>
                 <th className="px-4 py-2"></th>
@@ -65,6 +66,7 @@ const Home = () => {
                     <tr key={book.id}>
                       <td className="border px-4 py-2">{book.title}</td>
                       <td className="border px-4 py-2">{book.body}</td>
+                      <td className="border px-4 py-2">{book.user_id}</td>
                       <td className="border px-4 py-2">
                         <Link href="/">
                           <span className="text-blue-500">Show</span>
