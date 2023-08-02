@@ -1,7 +1,7 @@
 //クライアントサイドのレンダリングであることを伝える
 "use client"
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FormEvent } from 'react';
 //nextでページ遷移を行うため
 import Link from 'next/link';
 //Headerコンポーネとをimport
@@ -74,10 +74,13 @@ const Home = () => {
   };
 
   //本を作成
-  const handleSubmit=async()=>{
+  const handleSubmit=async(e: FormEvent<HTMLFormElement>)=>{
+    //formのデフォルト送信を防止
+    e.preventDefault();
     try{
       if (session_user){
         //APIレスポンスを取得
+        console.log("id:",session_user.id)
         const res: Book | ServerResponse= await newBook({title: title,body: body,user_id: session_user.id})
       }
       
@@ -93,6 +96,40 @@ const Home = () => {
       <Header />
       <div className='min-h-screen flex items-center justify-center bg-gray-100'>
         <div className='bg-white p-8 rounded shadow-md'>
+        <h1 className="text-3xl font-bold mb-6 text-black">新規登録</h1>
+          <form onSubmit={handleSubmit}>
+            <div className='mb-4'>
+              <label className='text-black mb-1'>
+                Title:
+                <input
+                  type="text"
+                  value={title}
+                  className="w-full border-2 border-gray-300 rounded-md p-2"
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </label>
+            </div>
+            <div className='mb-4'>
+              <label className='text-black mb-1'>
+                Body:
+                <input
+                  type="text"
+                  value={body}
+                  className="w-full border-2 border-gray-300 rounded-md p-2"
+                  onChange={(e) => setBody(e.target.value)}
+                />
+              </label>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="bg-blue-500 text-white rounded-md px-4 py-2"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
           <h1 className="text-3xl font-bold my-4 text-black">Book 一覧ページ</h1>
           <table className='table-auto w-full text-black'>
             <thead>
