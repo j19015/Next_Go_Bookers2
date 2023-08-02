@@ -11,19 +11,20 @@ import { getBookAll } from '../../features/books/api/get_bookAll';
 //newBookをimort
 import { newBook } from '@/features/books/api/new_book';
 //interfaceをimport
-import { BookList,BookListItem,ServerResponse} from "@/const/books/interface";
+import { Book,BookList,BookListItem,ServerResponse} from "@/const/books/interface";
 //ResponseUserをimport
 import { ResponseUser } from '@/const/users/interface';
 //sessionを取得する関数をimport
 import { sessionConfirm } from '@/features/users/api/session';
 // Next.js の useRouter フックを使用する
 import { useRouter } from 'next/navigation'; 
+//Book型をimport
 
 const Home = () => {
 
   //本作成用
-  const [title,setTitle]=useState(null);
-  const [body,setBody]=useState(null);
+  const [title,setTitle]=useState('');
+  const [body,setBody]=useState('');
   const [session_user,SetSession]=useState<ResponseUser | null>(null)
 
   // useRouterフックを初期化
@@ -75,11 +76,15 @@ const Home = () => {
   //本を作成
   const handleSubmit=async()=>{
     try{
-      //APIレスポンスを取得
-      //const res: BookListItem | ServerResponse= await newBook()
-
-    }catch{
-
+      if (session_user){
+        //APIレスポンスを取得
+        const res: Book | ServerResponse= await newBook({title: title,body: body,user_id: session_user.id})
+      }
+      
+    }catch(error){
+      //処理中のエラー処理
+      console.error('本の一覧を取得できませんでした。');
+      console.error('Error:', error);
     }
   }
 
