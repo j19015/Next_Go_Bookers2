@@ -34,7 +34,7 @@ const Home = () => {
 
   useEffect(() => {
     //sessionをAPIで取得
-    const session = sessionConfirm();
+    const session : ResponseUser | null = sessionConfirm();
     // sessionの情報を保存する
     getSession(session);
     
@@ -80,8 +80,9 @@ const Home = () => {
     try{
       if (session_user){
         //APIレスポンスを取得
-        console.log("id:",session_user.id)
         const res: Book | ServerResponse= await newBook({title: title,body: body,user_id: session_user.id})
+        // 本が作成された後、本の一覧を再取得する
+        await fetchBooksAll();
       }
       
     }catch(error){
