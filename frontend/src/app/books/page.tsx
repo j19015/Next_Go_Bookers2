@@ -156,17 +156,17 @@ const Home = () => {
                       <td className="border px-4 py-2">{book.body}</td>
                       <td className="border px-4 py-2">{book.user_id}</td>
                       <td className="border px-4 py-2">
-                        <Link href="/">
+                        <Link href = {`books/${book.id}`}>
                           <span className="text-blue-500">Show</span>
                         </Link>
                       </td>
                       <td className="border px-4 py-2">
-                        <Link href="/">
+                        <Link href= {`books/${book.id}/edit`} >
                           <span className="text-green-500">Edit</span>
                         </Link>
                       </td>
                       <td className="border px-4 py-2">
-                        <Link href="/">
+                        <Link href="/books">
                           <span className="text-red-500">Delete</span>
                         </Link>
                       </td>
