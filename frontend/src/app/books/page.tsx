@@ -83,6 +83,10 @@ const Home = () => {
         const res: Book | ServerResponse= await newBook({title: title,body: body,user_id: session_user.id})
         // 本が作成された後、本の一覧を再取得する
         await fetchBooksAll();
+        //titleをリセット
+        setTitle('');
+        //Bodyをリセット
+        setBody('');
       }
       
     }catch(error){
