@@ -11,7 +11,6 @@ export const updateBook=async(book: Book,id: number)=>{
       credentials: 'include',
       body: JSON.stringify(book)
     });
-
     // サーバーからのレスポンスに基づいて適切な処理を実行
     if (response.ok) {
       // サーバーからのレスポンスを取得

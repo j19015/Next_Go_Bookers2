@@ -75,7 +75,7 @@ const Home = () => {
     //formの送信を阻止
     e.preventDefault();
 
-    if(title && body && book){
+    if(book){
       try{
         //idが文字であり、numberに変更した際にエラーにならないこと
         if (typeof id === "string" && !isNaN(Number(id))) {
@@ -84,7 +84,7 @@ const Home = () => {
             console.log("error",res.error);
           }else{
             console.log("本の更新に成功しました。");
-            
+
             setBook(res);
           }
         }else{
