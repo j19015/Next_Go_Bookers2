@@ -17,8 +17,7 @@ import { ResponseUser } from '@/const/users/interface';
 //sessionを取得する関数をimport
 import { sessionConfirm } from '@/features/users/api/session';
 // Next.js の useRouter フックを使用する
-import { useRouter } from 'next/navigation'; 
-//Book型をimport
+import { useRouter } from 'next/navigation';
 
 const Home = () => {
 
