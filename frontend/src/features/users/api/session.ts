@@ -1,7 +1,7 @@
 import { ResponseUser } from "@/const/users/interface";
 
 //sessionの確認
-export const sessionConfirm=()=>{
+export const sessionConfirm= () =>{
   // セッション情報がlocalStorageに保存されているか確認
   const sessionData: string | null = localStorage.getItem('session');
   if(sessionData){

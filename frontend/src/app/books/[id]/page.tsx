@@ -19,15 +19,18 @@ import { useParams, useRouter } from 'next/navigation';
 
 
 const Home = () => {
-
-  const router = useParams();
-  const {id}= router;
+  //routerを定義
+  const router = useRouter();
+  //URLパラメータ取得用のparamsを定義
+  const params = useParams()
+  //paramsからidを抜き出し
+  const {id} = params;
   
   //title,bodyを定義
-  const [book,setBook]=useState<BookListItem | null>(null);
+  const [book,setBook] = useState<BookListItem | null>(null);
 
-  //getBookを定義
-  const fetchBook=async()=>{
+  //fetchBookを定義
+  const fetchBook = async() => {
     try {
       //idが文字であり、numberに変更した際にエラーにならないこと
       if (typeof id === "string" && !isNaN(Number(id))) {
@@ -41,11 +44,26 @@ const Home = () => {
         }
       }
     }catch(error){
+      console.log("error",error);
+    }
+  }
+
+  //fetchSession
+  const fetchSession = async() => {
+    try{
+      const res : ResponseUser | null = await sessionConfirm();
+
+      if (!res){
+        router.push("/users/sign_in");
+      }
+
+    }catch(error){
       console.log("error",error)
     }
   }
 
   useEffect(()=>{
+    fetchSession();
     fetchBook();
   },[])
 
