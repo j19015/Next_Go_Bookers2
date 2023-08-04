@@ -8,6 +8,8 @@ import Link from 'next/link';
 import Header from '@/components/base/Header/Header'
 //newBookをimort
 import { getBook } from '@/features/books/api/get_book';
+//updateBookをimport
+import { updateBook } from '@/features/books/api/update_book';
 //interfaceをimport
 import { BookListItem,ServerResponse} from "@/const/books/interface";
 //ResponseUserをimport
@@ -45,6 +47,8 @@ const Home = () => {
           console.error('Error fetching book data:', res.error);
         } else {
           setBook(res);
+          setTitle(res.title);
+          setBody(res.body);
         }
       }
     }catch(error){
@@ -67,8 +71,25 @@ const Home = () => {
   }
 
   //handleUpdateを定義
-  const handleUpdate = async() =>{
+  const handleUpdate = async(e: FormEvent<HTMLFormElement>) =>{
+    //formの送信を阻止
+    e.preventDefault();
+    
+    if(title && body && book){
+      try{
+        const res : BookListItem | ServerResponse = await updateBook({title: title,body: body,user_id: book?.user_id})
+        if ('error' in res){
+          console.log("error",res.error);
+        }else{
+          console.log("本の更新に成功しました。")
+          
+          setBook(res);
+        }
+      }catch(error){
+        console.log("error",error)
+      }
 
+    }
   }
 
   useEffect(()=>{
@@ -91,7 +112,7 @@ const Home = () => {
                 Title:
                 <input
                   type="text"
-                  value={book?.title}
+                  value={title}
                   className="w-full border-2 border-gray-300 rounded-md p-2"
                   onChange={(e) => setTitle(e.target.value)}
                 />
@@ -102,7 +123,7 @@ const Home = () => {
                 Body:
                 <input
                   type="text"
-                  value={book?.body}
+                  value={body}
                   className="w-full border-2 border-gray-300 rounded-md p-2"
                   onChange={(e) => setBody(e.target.value)}
                 />
