@@ -1,9 +1,9 @@
 import { Book, BookListItem,ServerResponse} from "@/const/books/interface";
 
-export const updateBook=async(book: Book)=>{
+export const updateBook=async(book: Book,id: number)=>{
   try{
     // POSTリクエストを使用してユーザー情報をサーバーに送信
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/books/${book.user_id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/books/${id}`, {
       headers: {
         'Content-Type': 'application/json',
       },

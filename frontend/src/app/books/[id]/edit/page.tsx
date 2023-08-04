@@ -74,16 +74,21 @@ const Home = () => {
   const handleUpdate = async(e: FormEvent<HTMLFormElement>) =>{
     //formの送信を阻止
     e.preventDefault();
-    
+
     if(title && body && book){
       try{
-        const res : BookListItem | ServerResponse = await updateBook({title: title,body: body,user_id: book?.user_id})
-        if ('error' in res){
-          console.log("error",res.error);
+        //idが文字であり、numberに変更した際にエラーにならないこと
+        if (typeof id === "string" && !isNaN(Number(id))) {
+          const res : BookListItem | ServerResponse = await updateBook({title: title,body: body,user_id: book?.user_id},Number(id))
+          if ('error' in res){
+            console.log("error",res.error);
+          }else{
+            console.log("本の更新に成功しました。");
+            
+            setBook(res);
+          }
         }else{
-          console.log("本の更新に成功しました。")
-          
-          setBook(res);
+          console.log("URLのidパラメータが不正です");
         }
       }catch(error){
         console.log("error",error)
@@ -105,7 +110,7 @@ const Home = () => {
 
       <div className='min-h-screen flex items-center justify-center bg-gray-100'>
         <div className='bg-white p-8 rounded shadow-md'>
-          <h1 className="text-3xl font-bold mb-6 text-black">Book 詳細ページ</h1>
+          <h1 className="text-3xl font-bold mb-6 text-black">Book 編集ページ</h1>
           <form onSubmit={handleUpdate}>
             <div className='mb-4'>
               <label className='text-black mb-1'>
