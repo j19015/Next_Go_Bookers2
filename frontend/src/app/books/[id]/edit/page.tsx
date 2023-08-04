@@ -26,8 +26,12 @@ const Home = () => {
   //paramsからidを抜き出し
   const {id} = params;
   
-  //title,bodyを定義
+  //bookを定義
   const [book,setBook] = useState<BookListItem | null>(null);
+  //titleを定義
+  const [title,setTitle] = useState('');
+  //bodyを定義
+  const [body,setBody] = useState('');
 
   //fetchBookを定義
   const fetchBook = async() => {
@@ -62,6 +66,11 @@ const Home = () => {
     }
   }
 
+  //handleUpdateを定義
+  const handleUpdate = async() =>{
+
+  }
+
   useEffect(()=>{
     //ログイン確認
     fetchSession();
@@ -76,18 +85,39 @@ const Home = () => {
       <div className='min-h-screen flex items-center justify-center bg-gray-100'>
         <div className='bg-white p-8 rounded shadow-md'>
           <h1 className="text-3xl font-bold mb-6 text-black">Book 詳細ページ</h1>
-          <div className='mb-4'>
-            <label className='text-black mb-1'>
-              Title:
-              <p className="w-full border-2 border-gray-300 rounded-md p-2">{book?.title}</p>
-            </label>
-          </div>
-          <div className='mb-4'>
-            <label className='text-black mb-1'>
-              Body:
-              <p className="w-full border-2 border-gray-300 rounded-md p-2">{book?.body}</p>
-            </label>
-          </div>
+          <form onSubmit={handleUpdate}>
+            <div className='mb-4'>
+              <label className='text-black mb-1'>
+                Title:
+                <input
+                  type="text"
+                  value={book?.title}
+                  className="w-full border-2 border-gray-300 rounded-md p-2"
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </label>
+            </div>
+            <div className='mb-4'>
+              <label className='text-black mb-1'>
+                Body:
+                <input
+                  type="text"
+                  value={book?.body}
+                  className="w-full border-2 border-gray-300 rounded-md p-2"
+                  onChange={(e) => setBody(e.target.value)}
+                />
+              </label>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="bg-blue-500 text-white rounded-md px-4 py-2"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </>
