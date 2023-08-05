@@ -10,6 +10,8 @@ export interface CreateUser extends User{
 //response受け取る時用
 export interface ResponseUser extends CreateUser{
   id: number;
+  created_at :string
+  updated_at: string
 }
 
 //Userリスト用
