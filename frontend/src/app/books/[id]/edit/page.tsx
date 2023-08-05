@@ -140,7 +140,7 @@ const Home = () => {
                 type="submit"
                 className="bg-blue-500 text-white rounded-md px-4 py-2"
               >
-                Submit
+                Update
               </button>
             </div>
           </form>
