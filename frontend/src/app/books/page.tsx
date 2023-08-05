@@ -18,6 +18,8 @@ import { ResponseUser } from '@/const/users/interface';
 import { sessionConfirm } from '@/features/users/api/session';
 // Next.js の useRouter フックを使用する
 import { useRouter } from 'next/navigation';
+//delete_bookをimport
+import { deleteBook } from '@/features/books/api/delete_book';
 
 const Home = () => {
 
@@ -71,6 +73,11 @@ const Home = () => {
       console.error('Error:', error);
     }
   };
+
+  //本を削除する関数
+  const fetchBookDelete = async()=>{
+
+  }
 
   //本を作成
   const handleSubmit=async(e: FormEvent<HTMLFormElement>)=>{
