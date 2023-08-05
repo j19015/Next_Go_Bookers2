@@ -12,6 +12,9 @@ export interface ResponseUser extends CreateUser{
   id: number;
 }
 
+//Userリスト用
+export type UserList = ResponseUser[];
+
 //エラーメッセージ用のレスポンス
 export interface ServerResponse{
   error: string;
