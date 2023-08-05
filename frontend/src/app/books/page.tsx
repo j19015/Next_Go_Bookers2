@@ -75,8 +75,19 @@ const Home = () => {
   };
 
   //本を削除する関数
-  const fetchBookDelete = async()=>{
-
+  const fetchBookDelete = async(id: number)=>{
+    try{
+      const res: ServerResponse = await deleteBook(id);
+      if ('error' in res){
+        console.log("削除に失敗しました。");
+      }else{
+        console.log("正常に削除しました。");
+        //本一覧を再度取得
+        fetchBooksAll();
+      }
+    }catch(error){
+      console.log("error",error)
+    }
   }
 
   //本を作成
@@ -172,7 +183,7 @@ const Home = () => {
                         </Link>
                       </td>
                       <td className="border px-4 py-2">
-                        <Link href="/books">
+                        <Link href="/books" onClick={()=>fetchBookDelete(book.id)}>
                           <span className="text-red-500">Delete</span>
                         </Link>
                       </td>

@@ -7,7 +7,7 @@ export const deleteBook=async(id: number)=>{
       headers: {
         'Content-Type': 'application/json',
       },
-      method: 'PATCH',
+      method: 'DELETE',
       credentials: 'include',
     });
 
