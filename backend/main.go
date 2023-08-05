@@ -130,6 +130,31 @@ func main() {
 		c.JSON(200, users)
 	})
 
+	//ユーザ情報取得機能
+	router.GET("/users/:id",func(c *gin.Context){
+		//URLパラメータからidを取得
+		userIDStr:=c.Param("id")
+		//数値に変換
+		userID,err :=strconv.Atoi(userIDStr)
+		//パラメータが不正な場合はエラーを出力して終了
+		if err != nil {
+			c.JSON(400,gin.H{"error": "Invalid User ID"})
+			return
+		}
+		
+		// GETは主キーの検索の時だけ使える
+		//context.Backgroud()は非同期用みたいな感じ
+		user, err := client.User.Get(context.Background(), userID)
+
+		if err != nil {
+			c.JSON(404,gin.H{"error": err.Error(),"message":"User with specified id not found"})
+			return
+		}
+
+		// 本の情報をJSON形式でレスポンスとして返す
+		c.JSON(200, user)
+	})
+
 
 	//本の新規登録
 	router.POST("/books",func(c *gin.Context){
