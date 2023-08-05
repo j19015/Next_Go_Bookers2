@@ -77,13 +77,15 @@ const Home = () => {
   //本を削除する関数
   const fetchBookDelete = async(id: number)=>{
     try{
-      const res: ServerResponse = await deleteBook(id);
-      if ('error' in res){
-        console.log("削除に失敗しました。");
-      }else{
-        console.log("正常に削除しました。");
-        //本一覧を再度取得
-        fetchBooksAll();
+      if (window.confirm("本当に削除しますか？")) {
+        const res: ServerResponse = await deleteBook(id);
+        if ('error' in res){
+          console.log("削除に失敗しました。");
+        }else{
+          console.log("正常に削除しました。");
+          //本一覧を再度取得
+          fetchBooksAll();
+        }
       }
     }catch(error){
       console.log("error",error)
