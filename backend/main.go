@@ -118,6 +118,18 @@ func main() {
 
 	})
 
+	//ユーザ一覧取得機能
+	router.GET("/users",func(c *gin.Context){
+		//User一覧を取得する
+		users,err:=client.User.Query().All(context.Background())
+		if err!=nil{
+			c.JSON(500,gin.H{"error": err.Error(),"message" : "Could user get the User list."})
+			return
+		}
+		//booksをjson形式で返す
+		c.JSON(200, users)
+	})
+
 
 	//本の新規登録
 	router.POST("/books",func(c *gin.Context){
@@ -144,7 +156,7 @@ func main() {
 		
 		//エラーがある場合はエラーを返して終了
 		if err != nil {
-			c.JSON(500, gin.H{"error": err.Error(),"messsage":"create book missing"})
+			c.JSON(500, gin.H{"error": err.Error(),"message":"create book missing"})
 			return
 		}
 	
@@ -168,7 +180,7 @@ func main() {
 		book, err := client.Book.Get(context.Background(), bookID)
 
 		if err != nil {
-			c.JSON(404,gin.H{"error": err.Error(),"messsage":"Book with specified id not found"})
+			c.JSON(404,gin.H{"error": err.Error(),"message":"Book with specified id not found"})
 			return
 		}
 
@@ -183,7 +195,7 @@ func main() {
 		//Book一覧を取得する
 		books,err:=client.Book.Query().All(context.Background())
 		if err!=nil{
-			c.JSON(500,gin.H{"error": err.Error(),"messsage":"Could not get the book list."})
+			c.JSON(500,gin.H{"error": err.Error(),"message":"Could not get the book list."})
 			return
 		}
 
@@ -207,7 +219,7 @@ func main() {
 		bookIDStr:=c.Param("id")
 		bookID,err:=strconv.Atoi(bookIDStr)
 		if err!=nil{
-			c.JSON(400,gin.H{"error": err.Error(),"messsage":"could not translation string->int"})
+			c.JSON(400,gin.H{"error": err.Error(),"message":"could not translation string->int"})
 			return
 		}
 		// 指定されたIDの本をデータベースからクエリする
@@ -221,7 +233,7 @@ func main() {
 		
 		//エラーならエラーを返して終了
 		if err != nil {
-			c.JSON(404, gin.H{"error": err.Error(),"messsage":"Couldn't update"})
+			c.JSON(404, gin.H{"error": err.Error(),"message":"Couldn't update"})
 			return
 		}
 	
