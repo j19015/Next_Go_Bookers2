@@ -55,7 +55,9 @@ const Home = () => {
                 userAll.map((user) => (
                   <tr key={user.id}>
                     <td className="border px-4 py-2">{user.id}</td>
-                    <td className="border px-4 py-2">{user.email}</td>
+                    <td className="border px-4 py-2">
+                      <Link href={`/users/${user.id}`} className='text-cyan-600 border-b-2 border-cyan-500'>{user.email}</Link>
+                    </td>
                     <td className="border px-4 py-2">{user.name}</td>
                     <td className="border px-4 py-2">*******</td>
                     <td className="border px-4 py-2">{user.created_at}</td>
