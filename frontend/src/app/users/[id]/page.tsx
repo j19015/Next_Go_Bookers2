@@ -48,7 +48,47 @@ const Home = () => {
   return (
     <>
       <Header></Header>
-      <h1>User 詳細ページ</h1>
+      <div className='min-h-screen flex items-center justify-center bg-gray-100'>
+        <div className='bg-white p-8 rounded shadow-md'>
+          <h1 className="text-3xl font-bold mb-6 text-black">User詳細ページ</h1>
+          <div className='mb-4'>
+            <label className='text-black mb-1'>
+              ID:
+              <p className="w-full border-2 border-gray-300 rounded-md p-2">{user?.id}</p>
+            </label>
+          </div>
+          <div className='mb-4'>
+            <label className='text-black mb-1'>
+              Email:
+              <p className="w-full border-2 border-gray-300 rounded-md p-2">{user?.email}</p>
+            </label>
+          </div>
+          <div className='mb-4'>
+            <label className='text-black mb-1'>
+              Name:
+              <p className="w-full border-2 border-gray-300 rounded-md p-2">{user?.name}</p>
+            </label>
+          </div>
+          <div className='mb-4'>
+            <label className='text-black mb-1'>
+              Password:
+              <p className="w-full border-2 border-gray-300 rounded-md p-2">*********</p>
+            </label>
+          </div>
+          <div className='mb-4'>
+            <label className='text-black mb-1'>
+              Created_at:
+              <p className="w-full border-2 border-gray-300 rounded-md p-2">{user?.created_at}</p>
+            </label>
+          </div>
+          <div className='mb-4'>
+            <label className='text-black mb-1'>
+              Updated_at:
+              <p className="w-full border-2 border-gray-300 rounded-md p-2">{user?.updated_at}</p>
+            </label>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
