@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+"use client"
+
+import React, { useEffect, useState } from 'react';
 //nextでページ遷移を行うため
 import Link from 'next/link';
 //Headerコンポーネとをimport
@@ -20,14 +22,16 @@ const Home = () => {
   //idを抽出
   const {id} = params;
 
+  //Userを取得する関数
   const fetchUser = async () => {
     try{
-      if(id && isNaN(Number(id))){
-        const res :ResponseUser | ServerResponse= await getUser(Number(id));
+      if(id && !isNaN(Number(id))){
+        const res :ResponseUser | ServerResponse = await getUser(Number(id));
         if ('error' in res){
           console.log("error",res.error);
         }else{
-
+          setUser(res);
+          console.log("User情報の取得が成功しました。")
         }
       }else{
         console.log("error","そのユーザは存在しません。");
@@ -37,6 +41,9 @@ const Home = () => {
     }
   }
   
+  useEffect(()=>{
+    fetchUser();
+  },[])
 
   return (
     <>
