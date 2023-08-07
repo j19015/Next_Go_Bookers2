@@ -86,6 +86,9 @@ const Home = () => {
               <p className="w-full border-2 border-gray-300 rounded-md p-2">{book?.body}</p>
             </label>
           </div>
+          <div className="mt-4">
+            <button className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded" onClick={() => router.push("/books")}>Back</button>
+          </div>
         </div>
       </div>
     </>
