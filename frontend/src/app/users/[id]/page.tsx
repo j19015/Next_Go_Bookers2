@@ -8,7 +8,7 @@ import Header from '@/components/base/Header/Header'
 //User型をimport
 import { ResponseUser, ServerResponse } from '@/const/users/interface';
 //URLパラメータ取得用
-import { useParams } from 'next/navigation';
+import { useParams,useRouter } from 'next/navigation';
 //getUserをimport
 import { getUser } from '@/features/users/api/get_user';
 
@@ -21,6 +21,8 @@ const Home = () => {
   const params = useParams();
   //idを抽出
   const {id} = params;
+  //routerを定義
+  const router = useRouter();
 
   //Userを取得する関数
   const fetchUser = async () => {
@@ -86,6 +88,9 @@ const Home = () => {
               Updated_at:
               <p className="w-full border-2 border-gray-300 rounded-md p-2">{user?.updated_at}</p>
             </label>
+          </div>
+          <div className="mt-4">
+            <button className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded" onClick={() => router.push("/users")}>Back</button>
           </div>
         </div>
       </div>
