@@ -134,14 +134,19 @@ const Home = () => {
                 />
               </label>
             </div>
+            <div className='flex justify-between'>
+              <div className="mt-4">
+                <button className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-md" onClick={() => router.push("/books")}>Back</button>
+              </div>
 
-            <div>
-              <button
-                type="submit"
-                className="bg-blue-500 text-white rounded-md px-4 py-2"
-              >
-                Update
-              </button>
+              <div className='mt-4'>
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white rounded-md px-4 py-2"
+                >
+                  Update
+                </button>
+              </div>
             </div>
           </form>
         </div>
