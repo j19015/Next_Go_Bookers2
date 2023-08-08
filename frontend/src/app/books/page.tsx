@@ -33,6 +33,10 @@ const Home = () => {
 
   const [bookAll,setBookAll]=useState<BookList>([])
 
+  // 新規登録フォームの表示状態を管理
+  const [showForm, setShowForm] = useState(false);
+
+
   useEffect(() => {
     //sessionをAPIで取得
     const session : ResponseUser | null = sessionConfirm();
@@ -114,46 +118,68 @@ const Home = () => {
       console.error('Error:', error);
     }
   }
+  
 
   return (
     <>
       <Header />
-      <div className='min-h-screen flex items-center justify-center bg-gray-100'>
+      <div className='min-h-screen flex items-center justify-center bg-gray-100 pt-5'>
         <div className='bg-white p-8 rounded shadow-md'>
-        <h1 className="text-3xl font-bold mb-6 text-black">新規登録</h1>
-          <form onSubmit={handleSubmit}>
-            <div className='mb-4'>
-              <label className='text-black mb-1'>
-                Title:
-                <input
-                  type="text"
-                  value={title}
-                  className="w-full border-2 border-gray-300 rounded-md p-2"
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </label>
-            </div>
-            <div className='mb-4'>
-              <label className='text-black mb-1'>
-                Body:
-                <input
-                  type="text"
-                  value={body}
-                  className="w-full border-2 border-gray-300 rounded-md p-2"
-                  onChange={(e) => setBody(e.target.value)}
-                />
-              </label>
-            </div>
-
-            <div>
+        {
+          showForm ? (
+            <>
               <button
-                type="submit"
-                className="bg-blue-500 text-white rounded-md px-4 py-2"
+                  className="bg-blue-500 text-white rounded-md px-4 py-2 mb-4"
+                  onClick={()=>setShowForm(!showForm)}
               >
-                Submit
+                -
               </button>
-            </div>
-          </form>
+              <h1 className="text-3xl font-bold mb-6 text-black">新規登録</h1>
+              <form onSubmit={handleSubmit}>
+                <div className='mb-4'>
+                  <label className='text-black mb-1'>
+                    Title:
+                    <input
+                      type="text"
+                      value={title}
+                      className="w-full border-2 border-gray-300 rounded-md p-2"
+                      onChange={(e) => setTitle(e.target.value)}
+                    />
+                  </label>
+                </div>
+                <div className='mb-4'>
+                  <label className='text-black mb-1'>
+                    Body:
+                    <input
+                      type="text"
+                      value={body}
+                      className="w-full border-2 border-gray-300 rounded-md p-2"
+                      onChange={(e) => setBody(e.target.value)}
+                    />
+                  </label>
+                </div>
+
+                <div>
+                  <button
+                    type="submit"
+                    className="bg-blue-500 text-white rounded-md px-4 py-2"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </>
+          ):(
+            <>
+              <button
+              className="bg-blue-500 text-white rounded-md px-4 py-2 mb-4"
+              onClick={()=>setShowForm(!showForm)}
+              >
+                +
+              </button>
+            </>
+          )
+        }
           <h1 className="text-3xl font-bold my-4 text-black">Book 一覧ページ</h1>
           <table className='table-auto w-full text-black'>
             <thead>
