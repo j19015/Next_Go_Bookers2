@@ -9,7 +9,7 @@ const About = () => {
 
       <div className="container mx-auto py-10">
         <div className="bg-white shadow-md rounded-lg p-8">
-          <h1 className="text-4xl font-semibold mb-6">Aboutページ</h1>
+          <h1 className="text-4xl font-semibold mb-6 text-black">Aboutページ</h1>
           <p className="text-lg font-medium text-gray-700 mb-8">
             このページは、ユーザ認証機能や本のCRUD（Create, Read, Update, Delete）が
             実装されたページです。
