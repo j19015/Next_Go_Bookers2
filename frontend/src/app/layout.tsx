@@ -1,3 +1,4 @@
+import Footer from '@/components/base/Footer/Footer'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="ja">
       <body className={inter.className}>
         {children}
+        <Footer/>
       </body>
     </html>
   )
