@@ -28,7 +28,9 @@ const Header = () => {
     <header className="bg-blue-500 p-4">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
-          <h1 className="text-white text-xl font-bold">Bookers2</h1>
+          <h1 className="text-white text-xl font-bold">
+            <Link href="/">Bookers2</Link>
+          </h1>
           <nav>
             <ul className="flex space-x-4 text-white">
               {/* セッションがある場合 */}
