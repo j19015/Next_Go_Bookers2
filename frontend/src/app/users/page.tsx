@@ -9,10 +9,15 @@ import Header from '@/components/base/Header/Header'
 import { UserList,ResponseUser,ServerResponse } from '@/const/users/interface';
 //getUserAllをimport
 import { getUserAll } from '@/features/users/api/get_userAll';
+//messageをimport
+import { message } from '../../const/message/interface';
 
 const Home = () => {
   
   const [userAll,setUserAll] = useState<UserList | null>(null);
+
+  //メッセージ用の変数を定義
+  const [message,setMessage]=useState<message | null>(null);
 
   const fetchUsers = async()=>{
     try{
