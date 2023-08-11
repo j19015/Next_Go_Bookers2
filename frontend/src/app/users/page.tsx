@@ -9,7 +9,7 @@ import Header from '@/components/base/Header/Header'
 import { UserList,ResponseUser,ServerResponse } from '@/const/users/interface';
 //getUserAllをimport
 import { getUserAll } from '@/features/users/api/get_userAll';
-//messageをimport
+//interfaceからmessageをimport
 import { message } from '../../const/message/interface';
 
 const Home = () => {
