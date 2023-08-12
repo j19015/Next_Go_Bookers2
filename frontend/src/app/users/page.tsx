@@ -26,7 +26,7 @@ const Home = () => {
         console.log("API error:",res.error);
       }else{
         setUserAll(res);
-        console.log(res)
+        console.log(res);
       }
     }catch(error){
       console.log("error",error);
