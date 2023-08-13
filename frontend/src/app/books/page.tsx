@@ -28,15 +28,18 @@ const Home = () => {
   //本作成用
   const [title,setTitle]=useState('');
   const [body,setBody]=useState('');
-  const [session_user,SetSession]=useState<ResponseUser | null>(null)
+  const [session_user,SetSession]=useState<ResponseUser | null>(null);
 
   // useRouterフックを初期化
   const router = useRouter(); 
 
-  const [bookAll,setBookAll]=useState<BookList>([])
+  const [bookAll,setBookAll]=useState<BookList>([]);
 
   // 新規登録フォームの表示状態を管理
   const [showForm, setShowForm] = useState(false);
+
+  //サクセス・エラーメッセージの表示状態を管理
+  const [flashMessage,setFlashMessage] = useState<message | null>(null);
 
 
   useEffect(() => {
