@@ -4,11 +4,11 @@
 import React, { useEffect, useState, FormEvent } from 'react';
 //nextでページ遷移を行うため
 import Link from 'next/link';
-//Headerコンポーネとをimport
+//Headerコンポーネントをimport
 import Header from '@/components/base/Header/Header'
 //getBookAllをimport
 import { getBookAll } from '../../features/books/api/get_bookAll';
-//newBookをimort
+//newBookをimport
 import { newBook } from '@/features/books/api/new_book';
 //interfaceをimport
 import { Book,BookList,BookListItem,ServerResponse} from "@/const/books/interface";
@@ -97,7 +97,7 @@ const Home = () => {
         }
       }
     }catch(error){
-      console.log("error",error)
+      console.log("error",error);
     }
   }
 

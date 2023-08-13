@@ -18,6 +18,8 @@ import { ResponseUser } from '@/const/users/interface';
 import { sessionConfirm } from '@/features/users/api/session';
 // Next.js の useRouter フックを使用する
 import { useParams, useRouter } from 'next/navigation';
+//messageのinterfaceをimport
+import { message } from '@/const/message/interface';
 
 
 const Home = () => {
@@ -34,6 +36,9 @@ const Home = () => {
   const [title,setTitle] = useState('');
   //bodyを定義
   const [body,setBody] = useState('');
+  
+  //messageの状態を管理
+  const [flashMessage,setFlashMessage]=useState<message | null>(null);
 
   //fetchBookを定義
   const fetchBook = async() => {
@@ -81,8 +86,10 @@ const Home = () => {
         if (typeof id === "string" && !isNaN(Number(id))) {
           const res : BookListItem | ServerResponse = await updateBook({title: title,body: body,user_id: book?.user_id},Number(id))
           if ('error' in res){
+            setFlashMessage({success: "",error : "本の更新に失敗しました。"});
             console.log("error",res.error);
           }else{
+            setFlashMessage({success: "本の更新に成功しました。",error : ""});
             console.log("本の更新に成功しました。");
 
             setBook(res);
@@ -111,6 +118,27 @@ const Home = () => {
       <div className='min-h-screen flex items-center justify-center bg-gray-100'>
         <div className='bg-white p-8 rounded shadow-md'>
           <h1 className="text-3xl font-bold mb-6 text-black">Book 編集ページ</h1>
+          {
+            flashMessage ? (
+              <>
+                {
+                  flashMessage.success ? (
+                    <>
+                      <h3 className='text-green-600 mb-3 px-4'>{flashMessage.success}</h3>
+                    </>
+                  ):(
+                    <>
+                      <h3 className='text-red-600 mb-3 px-4'>{flashMessage.error}</h3>
+                    </>
+                  )
+                }
+              </>
+            ):(
+              <>
+                <h3 className='text-gray-600 mb-3 px-4'>title,bodyを変更してください</h3>
+              </>
+            )
+          }
           <form onSubmit={handleUpdate}>
             <div className='mb-4'>
               <label className='text-black mb-1'>
