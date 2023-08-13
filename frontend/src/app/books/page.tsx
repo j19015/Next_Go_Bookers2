@@ -20,6 +20,8 @@ import { sessionConfirm } from '@/features/users/api/session';
 import { useRouter } from 'next/navigation';
 //delete_bookをimport
 import { deleteBook } from '@/features/books/api/delete_book';
+//messageのinterfaceをimport
+import { message } from '@/const/message/interface';
 
 const Home = () => {
 
