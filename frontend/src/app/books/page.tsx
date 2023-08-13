@@ -67,7 +67,7 @@ const Home = () => {
       //APIのレスポンスを取得
       const res: BookList | ServerResponse = await getBookAll();
        // resの内容を表示
-      console.log('API:', res);
+      console.log('API:' , res);
       //errorがあった場合の処理
       if ('error' in res) {
         console.error('本の一覧を取得できませんでした。');
@@ -115,11 +115,20 @@ const Home = () => {
         setTitle('');
         //Bodyをリセット
         setBody('');
+
+        //resの確認
+        if ('error' in res){
+          console.error('本の新規作成ができませんでした。');
+          //フラッシュメッセージを格納
+          setFlashMessage({success : "" ,error : res.error});
+        }else{
+          console.error('本の新規作成ができました。');
+          //フラッシュメッセージを格納
+          setFlashMessage({success : "本の作成に成功しました。" ,error : ""});
+        }
       }
-      
-    }catch(error){
+    }catch(error: any){
       //処理中のエラー処理
-      console.error('本の一覧を取得できませんでした。');
       console.error('Error:', error);
     }
   }
@@ -140,6 +149,27 @@ const Home = () => {
                 -
               </button>
               <h1 className="text-3xl font-bold mb-6 text-black">新規登録</h1>
+              {
+                flashMessage ? (
+                  <>
+                    {
+                      flashMessage.success ? (
+                        <>
+                          <h3 className='text-green-600 mb-3 px-4'>{flashMessage.success}</h3>
+                        </>
+                      ):(
+                        <>
+                          <h3 className='text-red-600 mb-3 px-4'>{flashMessage.error}</h3>
+                        </>
+                      )
+                    }
+                  </>
+                ):(
+                  <>
+                    <h3 className='text-gray-600 mb-3 px-4'>title,bodyを入力してください</h3>
+                  </>
+                )
+              }
               <form onSubmit={handleSubmit}>
                 <div className='mb-4'>
                   <label className='text-black mb-1'>
