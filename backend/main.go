@@ -155,6 +155,10 @@ func main() {
 		c.JSON(200, user)
 	})
 
+	//ユーザ情報編集機能
+	router.PATCH("/users/:id",func(c *gin.Context){
+		
+	})
 
 	//本の新規登録
 	router.POST("/books",func(c *gin.Context){
