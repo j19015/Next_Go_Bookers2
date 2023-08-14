@@ -155,9 +155,50 @@ func main() {
 		c.JSON(200, user)
 	})
 
-	//ユーザ情報編集機能
+	// ユーザ情報編集機能
 	router.PATCH("/users/:id",func(c *gin.Context){
+
+		// 編集で送られてくるリクエストを型定義
+		type EditRequest struct{
+			Email string `json:"email" binding:"required"`
+			Name string `json:"name" binding:"required"`
+			Password string `json:"password" binding:"required"`
+		}
+
+		// reqをEditRequestで定義
+		var req EditRequest
+		if err :=c.ShouldBindJSON(&req); err != nil{
+			c.JSON(400, gin.H{"error": "Invalid request"})
+      return
+		}
+
+		// URLパラメータからidを取得
+		userIDStr:=c.Param("id")
+		//数値に変換
+		userID,err:=strconv.Atoi(userIDStr)
+		// パラメータが不正な場合はエラーを返して終了
+		if err!=nil{
+			c.JSON(400,gin.H{"error": "Invalid User ID"})
+		}
+
+		// 指定されたIDのユーザをデータベースからクエリする
+		// GETは主キーの検索の時だけ使える
+		// context.Backgroud()は非同期用みたいな感じ
+		update_user, err := client.User.
+				UpdateOneID(userID).
+				SetEmail(req.Email).
+				SetName(req.Name).
+				SetPassword(req.Password).
+				Save(context.Background())
 		
+		// エラーならエラーを返して終了
+		if err != nil {
+			c.JSON(404, gin.H{"error": err.Error(),"message":"User Couldn't update"})
+			return
+		}
+	
+		// 本の情報をJSON形式でレスポンスとして返す
+		c.JSON(200, update_user)
 	})
 
 	//本の新規登録
