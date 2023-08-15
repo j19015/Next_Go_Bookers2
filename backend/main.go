@@ -193,7 +193,7 @@ func main() {
 		
 		// エラーならエラーを返して終了
 		if err != nil {
-			c.JSON(404, gin.H{"error": err.Error(),"message":"User Couldn't update"})
+			c.JSON(400, gin.H{"error": err.Error(),"message":"User Couldn't update"})
 			return
 		}
 	
