@@ -19,7 +19,7 @@ const Home = () => {
   const [user,setUser] = useState<ResponseUser | null>(null);
   //URLパラメータ取得
   const params = useParams();
-  //idを抽出
+  //idを抽出する
   const {id} = params;
   //routerを定義
   const router = useRouter();
@@ -52,7 +52,7 @@ const Home = () => {
       <Header></Header>
       <div className='min-h-screen flex items-center justify-center bg-gray-100'>
         <div className='bg-white p-8 rounded shadow-md'>
-          <h1 className="text-3xl font-bold mb-6 text-black">User編集ページ</h1>
+          <h1 className="text-3xl font-bold mb-6 text-black">User編集page</h1>
           <div className='mb-4'>
             <label className='text-black mb-1'>
               ID:
