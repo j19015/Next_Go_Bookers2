@@ -52,6 +52,7 @@ const Home = () => {
               <th className="px-4 py-2">Password</th>
               <th className="px-4 py-2">Created_at</th>
               <th className="px-4 py-2">Updated_at</th>
+              <th className="px-4 py-2"></th>
             </tr>
           </thead>
           <tbody>
@@ -67,6 +68,9 @@ const Home = () => {
                     <td className="border px-4 py-2">*******</td>
                     <td className="border px-4 py-2">{user.created_at}</td>
                     <td className="border px-4 py-2">{user.updated_at}</td>
+                    <td className="border px-4 py-2">
+                      <Link href={`/users/${user.id}/edit`} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Edit</Link>
+                    </td>
                   </tr>
                 ))
               ) : (
