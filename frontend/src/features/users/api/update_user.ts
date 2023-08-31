@@ -7,7 +7,7 @@ export const getUser=async(id: number)=>{
       headers: {
         'Content-Type': 'application/json',
       },
-      method: 'GET',
+      method: 'POST',
       credentials: 'include'
     });
 
