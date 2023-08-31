@@ -91,10 +91,10 @@ const Home = () => {
           </div>
           <div className='flex justify-between'>
             <div className="mt-4">
-              <button className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded" onClick={() => router.push("/users")}>Back</button>
+              <button className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded transition duration-300">Back</button>
             </div>
             <div className="mt-4">
-              <button className="bg-green-200 hover:bg-gray-300 text-green-700 font-bold py-2 px-4 rounded" onClick={() => router.push(`/users/${id}/edit`)}>Edit</button>
+              <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300" onClick={() => router.push(`/users/${id}/edit`)}>Edit</button>
             </div>
           </div>
         </div>
