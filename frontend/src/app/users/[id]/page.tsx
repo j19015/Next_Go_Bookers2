@@ -89,8 +89,13 @@ const Home = () => {
               <p className="w-full border-2 border-gray-300 rounded-md p-2">{user?.updated_at}</p>
             </label>
           </div>
-          <div className="mt-4">
-            <button className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded" onClick={() => router.push("/users")}>Back</button>
+          <div className='flex justify-between'>
+            <div className="mt-4">
+              <button className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded" onClick={() => router.push("/users")}>Back</button>
+            </div>
+            <div className="mt-4">
+              <button className="bg-green-200 hover:bg-gray-300 text-green-700 font-bold py-2 px-4 rounded" onClick={() => router.push(`/users/${id}/edit`)}>Edit</button>
+            </div>
           </div>
         </div>
       </div>
