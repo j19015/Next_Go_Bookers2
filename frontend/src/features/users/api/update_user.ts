@@ -1,6 +1,7 @@
 import { ResponseUser,ServerResponse } from "@/const/users/interface";
+import { User } from "@/const/users/interface";
 
-export const getUser=async(id: number)=>{
+export const UpdateUser=async(id: number,user: User)=>{
   try{
     // POSTリクエストを使用してユーザー情報をサーバーに送信
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
@@ -8,7 +9,8 @@ export const getUser=async(id: number)=>{
         'Content-Type': 'application/json',
       },
       method: 'POST',
-      credentials: 'include'
+      credentials: 'include',
+      body: JSON.stringify(user)
     });
 
     // サーバーからのレスポンスに基づいて適切な処理を実行
