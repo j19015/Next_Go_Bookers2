@@ -17,7 +17,7 @@ RUN npm install
 RUN npm run build
 
 # ポート番号を指定します（必要に応じて変更してください）
-EXPOSE 8000
+EXPOSE 3000
 
 # アプリケーションを起動します
 CMD ["npm","run","dev"]
