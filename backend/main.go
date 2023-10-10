@@ -78,8 +78,8 @@ func main() {
 			c.JSON(500, gin.H{"error": err.Error(),"messsage":"sign up missing"})
 			return
 		}
-		// 保存したBookの情報をレスポンスとして返す。
-		c.JSON(201, gin.H{"session_user": newUser})
+		// 保存したUserの情報をレスポンスとして返す。
+		c.JSON(201, gin.H{"user": newUser})
 
 	})
 
@@ -113,7 +113,7 @@ func main() {
 		}
 
 		// ログイン成功
-		c.JSON(200, gin.H{"session_user": sign_in_user})
+		c.JSON(200, gin.H{"user": sign_in_user})
 
 	})
 
@@ -222,9 +222,10 @@ func main() {
 		var req NewBookRequest
 		if err:=c.ShouldBindJSON(&req); err!=nil{
 			c.JSON(400,gin.H{"error":"Invalid request"})
+			return
 		}
 
-		// Bookを定義
+		// 本の情報を保存
 		newBook,err:=client.Book.
 				Create().
 				SetTitle(req.Title).
@@ -248,12 +249,15 @@ func main() {
 		// URLパラメータから本のIDを取得する。
 		bookIDStr:=c.Param("id")
 
+		// 文字->数字変換
 		bookID,err :=strconv.Atoi(bookIDStr)
+
 		// パラメータが不正な場合はエラーを出力して終了
 		if err != nil {
 			c.JSON(400,gin.H{"error": "Invalid Book ID"})
 			return
 		}
+		
 		// 指定されたIDの本をデータベースから検索
 		book, err := client.Book.Get(context.Background(), bookID)
 
@@ -273,6 +277,8 @@ func main() {
 
 		// Book一覧を取得する
 		books,err:=client.Book.Query().All(context.Background())
+
+		// エラーならエラーを返して終了
 		if err!=nil{
 			c.JSON(500,gin.H{"error": err.Error(),"message":"Could not get the book list."})
 			return
@@ -289,7 +295,7 @@ func main() {
 		type  UpdateBookRequest struct{
 			Title string `json:"title" binding:"required"`
 			Body string `json:"body" binding:"required"`
-			UserId int`json:"user_id" binding:"required"`
+			UserId int`json:"user_id"`
 		}
 		
 		// 引数で値を受け取るように変数を定義
@@ -297,7 +303,7 @@ func main() {
 	
 		// bookに受け取った値を格納
 		if err:=c.ShouldBindJSON(&book);err!=nil{
-			c.JSON(400,gin.H{"error": err.Error(),"message":"Invalid Book ID"})
+			c.JSON(400,gin.H{"error": err.Error(),"message":"Invalid Book columnns"})
 			return
 		}
 		
@@ -312,6 +318,20 @@ func main() {
 			c.JSON(400,gin.H{"error": err.Error(),"message":"could not translation string->int"})
 			return
 		}
+
+		// 指定されたIDの本をデータベースから検索
+		search_book, err := client.Book.Get(context.Background(), bookID)
+		if err != nil {
+			c.JSON(404, gin.H{"error": err.Error(), "message": "Book not found"})
+			return
+		}
+
+		// UserIdの確認
+		if *search_book.UserID != book.UserId{
+			c.JSON(403, gin.H{"error": "Unauthorized", "message": "UserId does not match"})
+			return
+		}
+
 		// 指定されたIDの本をデータベースから検索、更新
 		update_book, err := client.Book.
 				UpdateOneID(bookID).
@@ -321,7 +341,7 @@ func main() {
 		
 		// エラーならエラーを返して終了
 		if err != nil {
-			c.JSON(404, gin.H{"error": err.Error(),"message":"Couldn't update"})
+			c.JSON(500, gin.H{"error": err.Error(),"message":"Couldn't update"})
 			return
 		}
 	
